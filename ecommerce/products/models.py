@@ -47,3 +47,18 @@ class Price(BaseAbstractModel):
     def __str__(self):
         return f"{self.product} - {self.amount}"
 
+
+class Category(BaseAbstractModel):
+    name = models.CharField(
+        choices=enums.Categories.choices, verbose_name=_("Category"), max_length=255)
+
+    class Meta:
+        verbose_name = _("category")
+        verbose_name_plural = _("categories")
+
+    def __str__(self):
+        return f"{self.name}"
+
+class CategoryMembers(BaseAbstractModel):
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)

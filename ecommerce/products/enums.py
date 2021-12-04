@@ -7,3 +7,11 @@ class Colors(models.TextChoices):
     BLUE = "blue", _("Blue")
     WHITE = "white", _("White")
     YELLOW = "yellow", _("Yellow")
+
+class Categories(models.TextChoices):
+    TECHNOLOGY = "technology", _("Technology")
+    FASHION = "fashion", _("Fashion")
+    HOME = "home", _("home")
+    COSMETICS =  "cosmetics", _("Cosmetics")
+    KIDS = "kids", _("Kids")
+    PETS = "pets", _("Pets")
