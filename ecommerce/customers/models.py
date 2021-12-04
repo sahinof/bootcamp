@@ -4,10 +4,39 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.mail import send_mail
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 from django.db import models
 
 from customers.managers import CustomerManager
+
+
+class Country(AbstractBaseUser):
+    name = models.CharField(verbose_name=('CountryName'), max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class City(AbstractBaseUser):
+    country = models.ForeignKey(Country, verbose_name=('CountryName'),
+                                on_delete=models.PROTECT)
+    name = models.CharField(verbose_name=("CityName"), max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
+
+class Address(AbstractBaseUser):
+    name = models.CharField(verbose_name=('AddressName'), max_length=255)
+    fullname = models.CharField(verbose_name=('FullName'), max_length=255)
+    address1 = models.CharField(verbose_name=('Address1'), max_length=255)
+    address2 = models.CharField(verbose_name=('Address2'), max_length=255)
+    phone = PhoneNumberField()
+    district = models.CharField(verbose_name=('District'), max_length=255)
+    postcode = models.CharField(verbose_name=('Postcode'), max_length=10)
+
+    def __str__(self):
+        return f"{self.fullname} - {self.district} - {self.phone}"
 
 
 class Customer(AbstractBaseUser, PermissionsMixin):

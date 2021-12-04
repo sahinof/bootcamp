@@ -12,6 +12,6 @@ class Categories(models.TextChoices):
     TECHNOLOGY = "technology", _("Technology")
     FASHION = "fashion", _("Fashion")
     HOME = "home", _("home")
-    COSMETICS =  "cosmetics", _("Cosmetics")
+    COSMETICS = "cosmetics", _("Cosmetics")
     KIDS = "kids", _("Kids")
     PETS = "pets", _("Pets")
